@@ -11,31 +11,31 @@ datasource db {
 }
 
 model User {
-  id         String @id @default(uuid())
-  email      String @unique
-  name       String
-  password   String
-  dogs       Dog[]
+  id            String @id @default(uuid())
+  email         String @unique
+  name          String
+  password      String
+  dogs          Dog[]
 
   @@map("tutors")
 }
 
 model Dog {
-  id         String @id @default(uuid())
-  name       String
-  tutor      User @relation(fields: [tutor_id], references: [id])
-  tutor_id   String
-  historic   Historic[]
+  id            String @id @default(uuid())
+  name          String
+  tutor         User @relation(fields: [tutor_id], references: [id])
+  tutor_id      String
+  historic      Historic[]
 
   @@map("dogs")
 }
 
 model Historic {
-  id         String @id @default(uuid())
-  StepsAmout Int
-  time       DateTime @default(now())
-  dog        Dog @relation(fields: [dog_id], references: [id])
-  dog_id     String
+  id            String @id @default(uuid())
+  steps_amount  Int
+  time          DateTime @default(now())
+  dog           Dog @relation(fields: [dog_id], references: [id])
+  dog_id        String
 
   @@map("historic")
 }
