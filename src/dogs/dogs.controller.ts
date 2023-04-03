@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { DogsService } from './dogs.service';
@@ -16,10 +17,12 @@ import { CreateDogDto } from './dto/create-dog.dto';
 export class DogsController {
   constructor(private readonly dogsService: DogsService) {}
 
+  // @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() createDogDto: CreateDogDto) {
+  async create(@Body() createDogDto: CreateDogDto, @Request() req) {
     return await this.dogsService.create({
       ...createDogDto,
+      // tutor_id: req.user.id,
     });
   }
 
