@@ -12,8 +12,16 @@ export class HistoricService {
     });
   }
 
-  async find(id: string) {
-    return await this.prisma.historic.findMany({ where: { dog_id: id } });
+  async find(id: string, startDate?: Date, endDate?: Date) {
+    return await this.prisma.historic.findMany({
+      where: {
+        dog_id: id,
+        time: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
   }
 
   async remove(id: string) {
