@@ -24,16 +24,16 @@ export class HistoricController {
     });
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(
-    @Param('id') id: string,
+    @Param('id') dog_id: string,
     @Body() getHistoricDto: GetHistoricDto,
   ) {
     const { start_date, end_date } = getHistoricDto;
 
     const historic = await this.historicService.find(
-      id,
+      dog_id,
       start_date ? new Date(start_date) : undefined,
       end_date ? new Date(end_date) : undefined,
     );

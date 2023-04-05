@@ -13,8 +13,8 @@ export class DogsService {
     });
   }
 
-  async find(id: string) {
-    return await this.prisma.dog.findMany({ where: { tutor_id: id } });
+  async find(tutor_id: string) {
+    return await this.prisma.dog.findMany({ where: { tutor_id: tutor_id } });
   }
 
   async update(id: string, updateDogDto: UpdateDogDto) {

@@ -39,13 +39,13 @@ export class UsersController {
     });
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return await this.usersService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const user = await this.usersService.findOne(id);
@@ -57,7 +57,7 @@ export class UsersController {
     return user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     await this.findOne(id);
@@ -67,7 +67,7 @@ export class UsersController {
     return await this.usersService.update(id, { name, password });
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
     await this.findOne(id);

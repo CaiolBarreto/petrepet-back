@@ -26,10 +26,10 @@ export class DogsController {
     });
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const dog = await this.dogsService.find(id);
+  async findOne(@Param('id') tutor_id: string) {
+    const dog = await this.dogsService.find(tutor_id);
 
     if (!dog) {
       throw new HttpException('Dog not found', HttpStatus.NOT_FOUND);
