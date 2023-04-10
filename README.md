@@ -36,7 +36,7 @@ $ yarn install
 
 ```bash
 # development
-$ docker-compose up --build
+$ docker-compose up
 ```
 
 ## Running the app with docker
