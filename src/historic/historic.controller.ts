@@ -44,4 +44,11 @@ export class HistoricController {
 
     return historic;
   }
+
+  @Get('/last-week/:id')
+  async findLastWeekTotal(@Param('id') dog_id: string) {
+    const historic = await this.historicService.findLastWeekTotal(dog_id);
+
+    return historic;
+  }
 }
