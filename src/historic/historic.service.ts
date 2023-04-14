@@ -46,7 +46,7 @@ export class HistoricService {
         .split('-')
         .map((number) => parseInt(number, 10));
       return lower <= progress && progress <= upper;
-    });
+    }) ?? ['100', 'Meta batida'];
 
     const response = {
       ...historic,
