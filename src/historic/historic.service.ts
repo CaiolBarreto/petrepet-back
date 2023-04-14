@@ -49,7 +49,7 @@ export class HistoricService {
     }) ?? ['100', 'Meta batida'];
 
     const response = {
-      ...historic,
+      historic,
       totalSteps,
       progress,
       dailyGoalStatus: status[1],
