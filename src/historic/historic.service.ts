@@ -14,7 +14,7 @@ export class HistoricService {
   }
 
   async find(dog_id: string, startDate?: Date, endDate?: Date) {
-    return await this.prisma.historic.findMany({
+    const historic = await this.prisma.historic.findMany({
       where: {
         dog_id: dog_id,
         time: {
@@ -23,6 +23,40 @@ export class HistoricService {
         },
       },
     });
+
+    let totalSteps = 0;
+
+    const dailyStepGoal = 2000;
+
+    const ranges: { [key: string]: string } = {
+      '0-49': 'Podemos fazer melhor',
+      '50-79': 'Quero andar mais',
+      '80-99': 'Quase lá',
+      '100': 'Meta batida',
+    };
+
+    historic.forEach((hist) => {
+      totalSteps += hist.steps_amount;
+    });
+
+    const progress = (totalSteps / dailyStepGoal) * 100;
+
+    const status = Object.entries(ranges).find(([range]) => {
+      const [lower, upper] = range
+        .split('-')
+        .map((number) => parseInt(number, 10));
+      console.log(lower <= progress && progress <= upper);
+      return lower <= progress || progress <= upper;
+    });
+
+    const response = {
+      ...historic,
+      totalSteps,
+      progress,
+      dailyGoalStatus: status[1],
+    };
+
+    return response;
   }
 
   async remove(id: string) {

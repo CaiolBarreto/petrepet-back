@@ -13,7 +13,6 @@ import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 
 import { CreateHistoricDto } from './dto/create-historic.dto';
-import { GetHistoricDto } from './dto/get-historic-dto';
 import { HistoricService } from './historic.service';
 
 @Controller('historic')
@@ -31,18 +30,21 @@ export class HistoricController {
     });
   }
 
-  @Get(':id')
-  async findOne(
-    @Param('id') dog_id: string,
-    @Body() getHistoricDto: GetHistoricDto,
-  ) {
-    const { start_date, end_date } = getHistoricDto;
+  @Get('/daily/:id')
+  async findOne(@Param('id') dog_id: string) {
+    const now = new Date();
 
-    const historic = await this.historicService.find(
-      dog_id,
-      start_date ? new Date(start_date) : undefined,
-      end_date ? new Date(end_date) : undefined,
+    const midnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0,
     );
+
+    const historic = await this.historicService.find(dog_id, midnight, now);
 
     if (!historic) {
       throw new HttpException('Historic not found', HttpStatus.NOT_FOUND);
