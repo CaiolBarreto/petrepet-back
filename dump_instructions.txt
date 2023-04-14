@@ -1,0 +1,6 @@
+- Criar banco populado com o dump:
+
+docker-compose up (se já tem banco, rodar "docker rm petrepet-back_db_1" antes)
+docker exec -i petrepet-back_db_1 psql -U postgres -d postgres  < ./dump.sql
+
+Rota para testar: http://localhost:3000/historic/last-week/1fcbaf0d-590b-4440-b4c1-e3c665eafb3e
