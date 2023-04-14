@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsDate } from 'class-validator';
 
 export class CreateHistoricDto {
   @IsNotEmpty()
@@ -6,4 +6,8 @@ export class CreateHistoricDto {
 
   @IsNotEmpty()
   dog_id: string;
+
+  @IsNotEmpty()
+  @IsDate()
+  time: Date;
 }

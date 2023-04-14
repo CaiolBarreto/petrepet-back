@@ -6,16 +6,23 @@ import {
   HttpStatus,
   Param,
   Post,
-  UseGuards,
+  Logger,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { HttpService } from '@nestjs/axios';
+import { lastValueFrom } from 'rxjs';
+
 import { CreateHistoricDto } from './dto/create-historic.dto';
 import { GetHistoricDto } from './dto/get-historic-dto';
 import { HistoricService } from './historic.service';
 
 @Controller('historic')
 export class HistoricController {
-  constructor(private readonly historicService: HistoricService) {}
+  constructor(
+    private readonly historicService: HistoricService,
+    private readonly httpService: HttpService,
+    private readonly logger: Logger,
+  ) {}
 
   @Post()
   async create(@Body() createHistoricDto: CreateHistoricDto) {
@@ -24,7 +31,6 @@ export class HistoricController {
     });
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(
     @Param('id') dog_id: string,
@@ -51,4 +57,34 @@ export class HistoricController {
 
     return historic;
   }
+
+  // @Cron(CronExpression.EVERY_30_SECONDS)
+  // async getAndSaveData() {
+  //   try {
+  //     const response = await lastValueFrom(
+  //       this.httpService.get(
+  //         'https://64395c831b9a7dd5c965b389.mockapi.io/api/pedometer',
+  //       ),
+  //     );
+  //     const { data } = response;
+
+  //     if (!Array.isArray(data)) {
+  //       throw new Error('Response data is not an array');
+  //     }
+
+  //     for (const item of data) {
+  //       const historic = {
+  //         steps_amount: item.steps,
+  //         time: new Date(item.time),
+  //         dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
+  //       } as CreateHistoricDto;
+
+  //       await this.historicService.create(historic);
+  //     }
+
+  //     this.logger.debug('Called every 10 seconds');
+  //   } catch (error) {
+  //     console.error('Error fetching data from remote server', error);
+  //   }
+  // }
 }
