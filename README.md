@@ -32,17 +32,28 @@
 $ yarn install
 ```
 
-## Running the app
+## Running the app with docker-compose
 
 ```bash
 # development
-$ yarn start
+$ docker-compose up
+```
+
+## Running the app with docker
+
+```bash
+# create db with docker 
+$ docker run --name postgres-db -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 
 # watch mode
 $ yarn dev
+```
 
-# production mode
-$ yarn start:prod
+## Running the migrations
+
+```bash
+# run migration
+$ npx prisma migrate dev
 ```
 
 ## Test
