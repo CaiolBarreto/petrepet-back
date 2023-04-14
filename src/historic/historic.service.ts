@@ -26,7 +26,7 @@ export class HistoricService {
 
     let totalSteps = 0;
 
-    const dailyStepGoal = 2000;
+    const dailyStepGoal = 8000;
 
     const ranges: { [key: string]: string } = {
       '0-49': 'Podemos fazer melhor',
@@ -46,7 +46,7 @@ export class HistoricService {
         .split('-')
         .map((number) => parseInt(number, 10));
       console.log(lower <= progress && progress <= upper);
-      return lower <= progress || progress <= upper;
+      return lower <= progress && progress <= upper;
     });
 
     const response = {
