@@ -45,7 +45,6 @@ export class HistoricService {
       const [lower, upper] = range
         .split('-')
         .map((number) => parseInt(number, 10));
-      console.log(lower <= progress && progress <= upper);
       return lower <= progress && progress <= upper;
     });
 
