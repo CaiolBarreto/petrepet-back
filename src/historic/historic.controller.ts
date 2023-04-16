@@ -14,6 +14,7 @@ import { lastValueFrom } from 'rxjs';
 
 import { CreateHistoricDto } from './dto/create-historic.dto';
 import { HistoricService } from './historic.service';
+import { getDeviceIP } from 'src/utils/getDeviceIP';
 
 @Controller('historic')
 export class HistoricController {
@@ -60,33 +61,29 @@ export class HistoricController {
     return historic;
   }
 
-  // @Cron(CronExpression.EVERY_30_SECONDS)
-  // async getAndSaveData() {
-  //   try {
-  //     const response = await lastValueFrom(
-  //       this.httpService.get(
-  //         'https://64395c831b9a7dd5c965b389.mockapi.io/api/pedometer',
-  //       ),
-  //     );
-  //     const { data } = response;
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  async getAndSaveData() {
+    try {
+      const apiAddress = await getDeviceIP(this.logger);
 
-  //     if (!Array.isArray(data)) {
-  //       throw new Error('Response data is not an array');
-  //     }
+      if (apiAddress) {
+        const response = await lastValueFrom(this.httpService.get(apiAddress));
 
-  //     for (const item of data) {
-  //       const historic = {
-  //         steps_amount: item.steps,
-  //         time: new Date(item.time),
-  //         dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
-  //       } as CreateHistoricDto;
+        const { data } = response;
 
-  //       await this.historicService.create(historic);
-  //     }
+        const historic = {
+          steps_amount: data.steps,
+          time: new Date(data.time),
+          dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
+        } as CreateHistoricDto;
 
-  //     this.logger.debug('Called every 10 seconds');
-  //   } catch (error) {
-  //     console.error('Error fetching data from remote server', error);
-  //   }
-  // }
+        await this.historicService.create(historic);
+        this.logger.log('Data fetched and stored successfully.');
+      } else {
+        this.logger.warn('No pedometer endpoint found');
+      }
+    } catch (error) {
+      this.logger.error('Error fetching data from remote server', error);
+    }
+  }
 }
