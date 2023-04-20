@@ -9,7 +9,11 @@ export class HistoricService {
 
   async create(createHistoricDto: CreateHistoricDto) {
     return await this.prisma.historic.create({
-      data: createHistoricDto,
+      data: {
+        steps_amount: createHistoricDto.steps,
+        time: new Date(createHistoricDto.time),
+        dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
+      },
     });
   }
 

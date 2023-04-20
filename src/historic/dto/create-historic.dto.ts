@@ -2,7 +2,7 @@ import { IsNotEmpty, IsDate } from 'class-validator';
 
 export class CreateHistoricDto {
   @IsNotEmpty()
-  steps_amount: number;
+  steps: number;
 
   @IsNotEmpty()
   dog_id: string;
