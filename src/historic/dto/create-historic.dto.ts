@@ -8,6 +8,5 @@ export class CreateHistoricDto {
   dog_id: string;
 
   @IsNotEmpty()
-  @IsDate()
   time: string;
 }
