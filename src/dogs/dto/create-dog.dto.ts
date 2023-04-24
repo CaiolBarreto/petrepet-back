@@ -5,5 +5,5 @@ export class CreateDogDto {
   name: string;
 
   @IsNotEmpty()
-  tutor_id: string;
+  tutor_id: number;
 }

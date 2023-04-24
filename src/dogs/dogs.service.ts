@@ -13,18 +13,18 @@ export class DogsService {
     });
   }
 
-  async find(tutor_id: string) {
+  async find(tutor_id: number) {
     return await this.prisma.dog.findMany({ where: { tutor_id: tutor_id } });
   }
 
-  async update(id: string, updateDogDto: UpdateDogDto) {
+  async update(id: number, updateDogDto: UpdateDogDto) {
     return await this.prisma.dog.update({
       where: { id },
       data: updateDogDto,
     });
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     return await this.prisma.dog.delete({ where: { id } });
   }
 }

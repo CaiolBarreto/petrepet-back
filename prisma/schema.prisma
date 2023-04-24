@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       Int    @id @default(autoincrement())
   email    String @unique
   name     String
   password String
@@ -22,21 +22,21 @@ model User {
 }
 
 model Dog {
-  id       String     @id @default(uuid())
+  id       Int        @id @default(autoincrement())
   name     String
   tutor    User       @relation(fields: [tutor_id], references: [id])
-  tutor_id String
+  tutor_id Int
   historic Historic[]
 
   @@map("dogs")
 }
 
 model Historic {
-  id           String   @id @default(uuid())
+  id           Int      @id @default(autoincrement())
   steps_amount Int
   time         DateTime @default(now())
   dog          Dog      @relation(fields: [dog_id], references: [id])
-  dog_id       String
+  dog_id       Int
 
   @@map("historic")
 }

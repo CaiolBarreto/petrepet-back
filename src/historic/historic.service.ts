@@ -12,12 +12,12 @@ export class HistoricService {
       data: {
         steps_amount: createHistoricDto.steps,
         time: new Date(createHistoricDto.time),
-        dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
+        dog_id: 1,
       },
     });
   }
 
-  async find(dog_id: string, startDate?: Date, endDate?: Date) {
+  async find(dog_id: number, startDate?: Date, endDate?: Date) {
     const historic = await this.prisma.historic.findMany({
       where: {
         dog_id: dog_id,
@@ -62,11 +62,11 @@ export class HistoricService {
     return response;
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     return await this.prisma.historic.delete({ where: { id } });
   }
 
-  async findLastWeekTotal(dog_id: string) {
+  async findLastWeekTotal(dog_id: number) {
     const lastWeek = getLastWeekDate();
 
     const historic = await this.prisma.historic.findMany({
