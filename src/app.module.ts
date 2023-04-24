@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DogsModule } from './dogs/dogs.module';
 import { HistoricModule } from './historic/historic.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { AnalyzerModule } from './analyzer/analyzer.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     DogsModule,
     HistoricModule,
     ScheduleModule.forRoot(),
+    AnalyzerModule,
   ],
   controllers: [],
   providers: [Logger],

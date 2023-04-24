@@ -22,11 +22,14 @@ model User {
 }
 
 model Dog {
-  id       String     @id @default(uuid())
-  name     String
-  tutor    User       @relation(fields: [tutor_id], references: [id])
-  tutor_id String
-  historic Historic[]
+  id        String     @id @default(uuid())
+  name      String
+  age       Int
+  weight    Float
+  bcs_index Float
+  tutor     User       @relation(fields: [tutor_id], references: [id])
+  tutor_id  String
+  historic  Historic[]
 
   @@map("dogs")
 }

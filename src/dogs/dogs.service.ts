@@ -13,7 +13,11 @@ export class DogsService {
     });
   }
 
-  async find(tutor_id: string) {
+  async findOne(id: string) {
+    return await this.prisma.dog.findUnique({ where: { id } });
+  }
+
+  async findByTutor(tutor_id: string) {
     return await this.prisma.dog.findMany({ where: { tutor_id: tutor_id } });
   }
 
