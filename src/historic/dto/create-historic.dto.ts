@@ -9,5 +9,5 @@ export class CreateHistoricDto {
 
   @IsNotEmpty()
   @IsDate()
-  time: Date;
+  time: string;
 }
