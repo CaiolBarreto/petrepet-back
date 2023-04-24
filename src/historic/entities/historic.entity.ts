@@ -1,5 +1,5 @@
 export class Historic {
-  id: number;
+  id: string;
   steps_amout: number;
   time: Date;
   dog_id: string;

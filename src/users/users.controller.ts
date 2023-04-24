@@ -48,7 +48,7 @@ export class UsersController {
   // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const user = await this.usersService.findOne(+id);
+    const user = await this.usersService.findOne(id);
 
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -64,7 +64,7 @@ export class UsersController {
 
     const { name, password } = updateUserDto;
 
-    return await this.usersService.update(+id, { name, password });
+    return await this.usersService.update(id, { name, password });
   }
 
   // @UseGuards(JwtAuthGuard)
@@ -72,6 +72,6 @@ export class UsersController {
   async remove(@Param('id') id: string) {
     await this.findOne(id);
 
-    await this.usersService.remove(+id);
+    await this.usersService.remove(id);
   }
 }

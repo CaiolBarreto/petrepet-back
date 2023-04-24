@@ -5,7 +5,7 @@ export class CreateHistoricDto {
   steps: number;
 
   @IsNotEmpty()
-  dog_id: number;
+  dog_id: string;
 
   @IsNotEmpty()
   time: string;

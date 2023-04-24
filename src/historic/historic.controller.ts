@@ -44,7 +44,7 @@ export class HistoricController {
       0,
     );
 
-    const historic = await this.historicService.find(+dog_id, midnight, now);
+    const historic = await this.historicService.find(dog_id, midnight, now);
 
     if (!historic) {
       throw new HttpException('Historic not found', HttpStatus.NOT_FOUND);
@@ -55,7 +55,7 @@ export class HistoricController {
 
   @Get('/last-week/:id')
   async findLastWeekTotal(@Param('id') dog_id: string) {
-    const historic = await this.historicService.findLastWeekTotal(+dog_id);
+    const historic = await this.historicService.findLastWeekTotal(dog_id);
 
     return historic;
   }

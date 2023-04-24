@@ -1,5 +1,5 @@
 export class Dog {
-  id: number;
+  id: string;
   name: string;
   tutor_id: string;
 }
