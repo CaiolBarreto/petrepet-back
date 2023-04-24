@@ -24,9 +24,9 @@ model User {
 model Dog {
   id        String     @id @default(uuid())
   name      String
-  age       Int
-  weight    Float
-  bcs_index Float
+  age       Int        @default(2)
+  weight    Float      @default(12)
+  bcs_index Float      @default(3)
   tutor     User       @relation(fields: [tutor_id], references: [id])
   tutor_id  String
   historic  Historic[]
