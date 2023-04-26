@@ -12,7 +12,7 @@ export class HistoricService {
       data: {
         steps_amount: createHistoricDto.steps,
         time: new Date(createHistoricDto.time),
-        dog_id: 'c1b865d7-a7c1-4da9-b2fd-3e658fb4b556',
+        dog_id: 'c8571e53-1af7-4fd1-aca4-bd77941d8a5e',
       },
     });
   }
