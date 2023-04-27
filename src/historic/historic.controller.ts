@@ -9,6 +9,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { startOfDay } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 
@@ -32,17 +34,11 @@ export class HistoricController {
 
   @Get('/daily/:id')
   async findOne(@Param('id') dog_id: string) {
-    const now = new Date();
+    const timezone = 'America/Sao_Paulo';
 
-    const midnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      0,
-      0,
-      0,
-      0,
-    );
+    const now = utcToZonedTime(new Date(), timezone);
+
+    const midnight = startOfDay(now);
 
     const historic = await this.historicService.find(dog_id, midnight, now);
 
