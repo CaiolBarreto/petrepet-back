@@ -35,7 +35,7 @@ export class AnalyzerController {
 
       const response = await lastValueFrom(
         this.httpService.post(
-          `https://petrepet-analyzer.onrender.com/analyzer`,
+          `https://petrepet-analyzer.onrender.com/analyzer/v2`,
           dataToAnalyze,
         ),
       );
