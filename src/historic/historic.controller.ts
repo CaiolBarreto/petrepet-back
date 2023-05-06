@@ -56,33 +56,22 @@ export class HistoricController {
     return historic;
   }
 
-  // @Cron(CronExpression.EVERY_30_SECONDS)
-  // async getAndSaveData() {
-  //   try {
-  //     const response = await lastValueFrom(
-  //       this.httpService.get(
-  //         'https://64395c831b9a7dd5c965b389.mockapi.io/api/pedometer',
-  //       ),
-  //     );
-  //     const { data } = response;
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  async getAndSaveData() {
+    const timezone = 'America/Sao_Paulo';
 
-  //     if (!Array.isArray(data)) {
-  //       throw new Error('Response data is not an array');
-  //     }
+    const now = utcToZonedTime(new Date(), timezone);
 
-  //     for (const item of data) {
-  //       const historic = {
-  //         steps_amount: item.steps,
-  //         time: new Date(item.time),
-  //         dog_id: '1fcbaf0d-590b-4440-b4c1-e3c665eafb3e',
-  //       } as CreateHistoricDto;
+    try {
+      const historic = {
+        steps: Math.floor(Math.random() * 11),
+        time: `${now}`,
+        dog_id: 'a6124ccf-4903-4883-8cdf-bcde488688b1',
+      };
 
-  //       await this.historicService.create(historic);
-  //     }
-
-  //     this.logger.debug('Called every 10 seconds');
-  //   } catch (error) {
-  //     console.error('Error fetching data from remote server', error);
-  //   }
-  // }
+      return await this.historicService.create(historic);
+    } catch (error) {
+      console.error('Error fetching data from remote server', error);
+    }
+  }
 }

@@ -3,7 +3,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
 import { DogsService } from 'src/dogs/dogs.service';
 import { HistoricService } from 'src/historic/historic.service';
-import * as admin from 'firebase-admin';
+// import * as admin from 'firebase-admin';
 
 @Controller('analyzer')
 export class AnalyzerController {
@@ -42,15 +42,15 @@ export class AnalyzerController {
 
       const { data } = response;
 
-      const message = {
-        notification: {
-          title: 'Hello from NestJS!',
-          body: 'This is a notification sent from a NestJS application!',
-        },
-        topic: 'flutter-app',
-      };
+      // const message = {
+      //   notification: {
+      //     title: 'Hello from NestJS!',
+      //     body: 'This is a notification sent from a NestJS application!',
+      //   },
+      //   topic: 'flutter-app',
+      // };
 
-      await admin.messaging().send(message);
+      // await admin.messaging().send(message);
 
       return data;
     } catch (error) {
