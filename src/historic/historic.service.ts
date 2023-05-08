@@ -30,7 +30,7 @@ export class HistoricService {
 
     let totalSteps = 0;
 
-    const dailyStepGoal = 8000;
+    const dailyStepGoal = 4500;
 
     const ranges: { [key: string]: string } = {
       '0-49': 'Podemos fazer melhor',

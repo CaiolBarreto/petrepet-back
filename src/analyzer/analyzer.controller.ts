@@ -30,7 +30,7 @@ export class AnalyzerController {
         weight,
         bcs_index,
         last_steps: lastStepsArray,
-        steps_goal: 8000,
+        steps_goal: 4500,
       };
 
       const response = await lastValueFrom(
