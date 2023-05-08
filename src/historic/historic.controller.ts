@@ -60,7 +60,7 @@ export class HistoricController {
 
   @Cron(CronExpression.EVERY_30_SECONDS)
   async getAndSaveData() {
-    const dogId = 'a6124ccf-4903-4883-8cdf-bcde488688b1';
+    const dogId = 'c8571e53-1af7-4fd1-aca4-bd77941d8a5e';
     const timezone = 'America/Sao_Paulo';
 
     const now = utcToZonedTime(new Date(), timezone);
@@ -84,7 +84,7 @@ export class HistoricController {
 
   @Post('/toggle')
   async toggleCreation() {
-    const dogId = 'a6124ccf-4903-4883-8cdf-bcde488688b1';
+    const dogId = 'c8571e53-1af7-4fd1-aca4-bd77941d8a5e';
 
     const dog = await this.dogService.findOne(dogId);
     dog.automatic_creation = !dog.automatic_creation;
